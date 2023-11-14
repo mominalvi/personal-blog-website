@@ -10,8 +10,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 import os
-import re
-
 
 '''
 Make sure the required packages are installed: 
@@ -27,7 +25,7 @@ This will install the packages from the requirements.txt for this project.
 '''
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = os.environ.get('SEC_KEY')
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 login_manager = LoginManager()
@@ -35,11 +33,11 @@ login_manager.init_app(app)
 
 # CONNECT TO DB
 
-uri = os.getenv("DB_URI", "sqlite:///blog.db")
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
+uri = os.environ.get("DB_URI", "sqlite:///blog.db")
+print(os.environ.get('DB_URI'))
+# app.config['SQLALCHEMY_DATABASE_URI'] = uri
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = uri
 db = SQLAlchemy()
 db.init_app(app)
 
