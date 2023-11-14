@@ -33,11 +33,6 @@ Bootstrap5(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-@login_manager.user_loader
-def load_user(user_id):
-    return db.session.execute(db.select(User).where(User.id == int(user_id))).scalar()
-
-
 # CONNECT TO DB
 
 uri = os.getenv("DB_URI", "sqlite:///blog.db")
@@ -104,6 +99,10 @@ gravatar = Gravatar(app,
                     force_lower=False,
                     use_ssl=False,
                     base_url=None)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.execute(db.select(User).where(User.id == int(user_id))).scalar()
 
 def admin_only(f):
     @wraps(f)
