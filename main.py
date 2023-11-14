@@ -1,5 +1,6 @@
+import smtplib
 from datetime import date
-from flask import Flask, abort, render_template, redirect, url_for, flash
+from flask import Flask, abort, render_template, redirect, url_for, flash, request
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
 from flask_gravatar import Gravatar
@@ -25,7 +26,6 @@ This will install the packages from the requirements.txt for this project.
 '''
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SEC_KEY')
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 login_manager = LoginManager()
@@ -34,9 +34,9 @@ login_manager.init_app(app)
 # CONNECT TO DB
 
 uri = os.environ.get("DB_URI", "sqlite:///blog.db")
-print(os.environ.get('DB_URI'))
-# app.config['SQLALCHEMY_DATABASE_URI'] = uri
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+# app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 
 db = SQLAlchemy()
 db.init_app(app)
@@ -86,8 +86,8 @@ class Comment(db.Model):
     parent_post = relationship("BlogPost", back_populates="comments")
     text = db.Column(db.Text, nullable=False)
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 gravatar = Gravatar(app,
                     size=100,
@@ -230,15 +230,14 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
         post = True
         data = request.form
         send_email(name=data['name'], email=data['email'], phone=data['phone'], message=data['message'])
         return render_template("contact.html", message_sent=post)
-    else:
-        render_template("contact.html")
+    return render_template("contact.html")
 
 def send_email(name, email, phone, message):
     my_email = os.environ.get('MY_EMAIL')
