@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 import os
+import re
 
 
 '''
@@ -38,7 +39,12 @@ def load_user(user_id):
 
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI', 'sqlite:///posts.db')
+
+uri = os.getenv("DB_URI", "sqlite:///blog.db")
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 db = SQLAlchemy()
 db.init_app(app)
 
@@ -87,9 +93,9 @@ class Comment(db.Model):
     parent_post = relationship("BlogPost", back_populates="comments")
     text = db.Column(db.Text, nullable=False)
 
-with app.app_context():
-
-    db.create_all()
+# with app.app_context():
+#
+#     db.create_all()
 
 gravatar = Gravatar(app,
                     size=100,
