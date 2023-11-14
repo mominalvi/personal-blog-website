@@ -8,8 +8,8 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
-# Import your forms from the forms.py
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
+import os
 
 
 '''
@@ -26,7 +26,7 @@ This will install the packages from the requirements.txt for this project.
 '''
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 login_manager = LoginManager()
@@ -38,7 +38,7 @@ def load_user(user_id):
 
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI', 'sqlite:///posts.db')
 db = SQLAlchemy()
 db.init_app(app)
 
@@ -230,7 +230,26 @@ def about():
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    if request.method == "POST":
+        post = True
+        data = request.form
+        send_email(name=data['name'], email=data['email'], phone=data['phone'], message=data['message'])
+        return render_template("contact.html", message_sent=post)
+    else:
+        render_template("contact.html")
+
+def send_email(name, email, phone, message):
+    my_email = os.environ.get('MY_EMAIL')
+    password = os.environ.get('MY_PASSWORD')
+    with smtplib.SMTP(host="173.194.193.108", port=587) as connection:
+        connection.starttls()
+        connection.login(user=my_email, password=password)
+        connection.sendmail(from_addr=my_email,
+                            to_addrs="testermandem@gmail.com",
+                            msg="Subject: New Message!\n\n"
+                                f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}")
+
+
 
 
 if __name__ == "__main__":
