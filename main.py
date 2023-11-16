@@ -37,7 +37,8 @@ login_manager.init_app(app)
 
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://blog_database_5e9m_user:nBzf2l7xL3z1sgDpiIbl1QGKMVOAuf9A@dpg-clapcmrmot1c7384dcig-a.oregon-postgres.render.com/blog_database_5e9m'
 db = SQLAlchemy()
 db.init_app(app)
 
@@ -227,10 +228,10 @@ def delete_post(post_id):
 @app.route("/delete-comment/<int:comment_id>")
 @admin_only
 def delete_comment(comment_id):
-    comment_to_delete = db.get_or_404(BlogPost, comment_id)
+    comment_to_delete = db.get_or_404(Comment, comment_id)
     db.session.delete(comment_to_delete)
     db.session.commit()
-    return redirect(url_for('show_post'))
+    return redirect(url_for('get_all_posts'))
 
 
 @app.route("/about")
