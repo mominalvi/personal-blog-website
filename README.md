@@ -59,3 +59,18 @@ MIT License
 - Adjust the 'Contributing' and 'License' sections as per your project's requirements.
 - If you include a license reference, ensure the link points to the correct file in your repository.
 
+# Admin View
+## Homepage View
+
+![Homepage View](URL_TO_YOUR_IMAGE)
+
+This is the homepage of the blog where all posts are listed.
+
+## Admin View
+
+![Admin View](URL_TO_YOUR_IMAGE)
+
+This view is accessible by the admin to edit or delete posts and manage comments.
+
+
+
