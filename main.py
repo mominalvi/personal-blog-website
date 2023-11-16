@@ -246,7 +246,7 @@ def send_email(name, email, phone, message):
         connection.starttls()
         connection.login(user=my_email, password=password)
         connection.sendmail(from_addr=my_email,
-                            to_addrs="testermandem@gmail.com",
+                            to_addrs="mominalvi30@gmail.com",
                             msg="Subject: New Message!\n\n"
                                 f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}")
 
