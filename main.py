@@ -11,6 +11,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 import os
+from dotenv import load_dotenv
+
 
 
 
@@ -38,7 +40,7 @@ login_manager.init_app(app)
 # uri = os.environ.get("DB_URI", "sqlite:///blog.db")
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 
 db = SQLAlchemy()
 db.init_app(app)
@@ -88,8 +90,8 @@ class Comment(db.Model):
     parent_post = relationship("BlogPost", back_populates="comments")
     text = db.Column(db.Text, nullable=False)
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 gravatar = Gravatar(app,
                     size=100,
