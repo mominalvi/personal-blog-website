@@ -33,10 +33,10 @@ login_manager.init_app(app)
 
 # CONNECT TO DB
 
-uri = os.environ.get("DB_URI", "sqlite:///blog.db")
-app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
-# app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+# uri = os.environ.get("DB_URI", "sqlite:///blog.db")
+# app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 
 db = SQLAlchemy()
 db.init_app(app)
@@ -86,8 +86,8 @@ class Comment(db.Model):
     parent_post = relationship("BlogPost", back_populates="comments")
     text = db.Column(db.Text, nullable=False)
 
-# with app.app_context():
-#     db.create_all()
+with app.app_context():
+    db.create_all()
 
 gravatar = Gravatar(app,
                     size=100,
