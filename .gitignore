@@ -1,4 +1,4 @@
 posts.db
+.env
 venv
 .idea
-.env
