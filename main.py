@@ -39,7 +39,7 @@ login_manager.init_app(app)
 # CONNECT TO DB
 
 # uri = os.environ.get("DB_URI", "sqlite:///blog.db")
-uri = os.getenv('DB_URI')
+uri = os.environ.get('DB_URI')
 print(uri)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
