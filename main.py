@@ -35,11 +35,9 @@ login_manager.init_app(app)
 
 # CONNECT TO DB
 
-# uri = os.environ.get("DB_URI", "sqlite:///blog.db")
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://blog_database_5e9m_user:nBzf2l7xL3z1sgDpiIbl1QGKMVOAuf9A@dpg-clapcmrmot1c7384dcig-a.oregon-postgres.render.com/blog_database_5e9m'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
 db = SQLAlchemy()
 db.init_app(app)
 
