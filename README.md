@@ -25,33 +25,31 @@ This blog application is a full-featured web platform built using Flask, a light
    git clone [repository-url]
    cd blog-application
 
-Set Up a Virtual Environment (Optional but recommended):
+2. Set Up a Virtual Environment (Optional but recommended):
+   Copy code
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 
-bash
-Copy code
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-Install Required Packages:
+4. Install Required Packages:
+   Copy code
+   ```bash
+   pip install -r requirements.txt
 
-bash
-Copy code
-pip install -r requirements.txt
-Environment Variables:
+5. Environment Variables:
+   - Set your environment variables for the database URI and any other sensitive information.
 
-Set your environment variables for the database URI and any other sensitive information.
-Initialize the Database:
+6, Initialize the Database:
+   - Run the Flask application to create the database schema.
 
-Run the Flask application to create the database schema.
-Run the Application:
-
-bash
-Copy code
-flask run
-Usage
-Access the application through your web browser at http://127.0.0.1:5000/.
-Register a new user account to start blogging and interact with other posts.
-Contributing
-Contributions to this project are welcome! Please fork the repository and submit a pull request with your features or fixes.
+7. Run the Application: Copy code
+   ```bash
+   flask run
+- Usage
+- Access the application through your web browser at http://127.0.0.1:5000/.
+- Register a new user account to start blogging and interact with other posts.
+- Contributing
+- Contributions to this project are welcome! Please fork the repository and submit a pull request with your features or fixes.
 
 License
 MIT License
