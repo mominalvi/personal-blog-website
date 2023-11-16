@@ -33,10 +33,9 @@ login_manager.init_app(app)
 
 # CONNECT TO DB
 
-# uri = os.environ.get("DB_URI", "sqlite:///blog.db")
-# app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+uri = os.environ.get("DB_URI", "sqlite:///blog.db")
+app.config['SECRET_KEY'] = os.environ.get('SEC_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 db = SQLAlchemy()
 db.init_app(app)
