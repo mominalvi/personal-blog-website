@@ -249,7 +249,7 @@ def send_email(name, email, phone, message):
         connection.sendmail(from_addr=my_email,
                             to_addrs=to_email,
                             msg="Subject: New Message!\n\n"
-                                f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}")
+                                f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}".encode('utf-8'))
 
 
 
