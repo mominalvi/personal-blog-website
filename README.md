@@ -62,13 +62,13 @@ MIT License
 # Admin View
 ## Homepage View
 
-![Homepage View](URL_TO_YOUR_IMAGE)
+![Homepage View](admin-view-1.png)
 
 This is the homepage of the blog where all posts are listed.
 
 ## Admin View
 
-![Admin View](URL_TO_YOUR_IMAGE)
+![Admin View](admin-view-2.png)
 
 This view is accessible by the admin to edit or delete posts and manage comments.
 
