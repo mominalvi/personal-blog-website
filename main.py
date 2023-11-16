@@ -1,5 +1,7 @@
 import smtplib
 from datetime import date
+
+import dotenv
 from flask import Flask, abort, render_template, redirect, url_for, flash, request
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
@@ -11,6 +13,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 import os
+dotenv.load_dotenv()
+
 
 '''
 Make sure the required packages are installed: 
@@ -33,7 +37,9 @@ login_manager.init_app(app)
 
 # CONNECT TO DB
 
-uri = os.environ.get("DB_URI", "sqlite:///blog.db")
+# uri = os.environ.get("DB_URI", "sqlite:///blog.db")
+uri = os.getenv('DB_URI')
+print(uri)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
