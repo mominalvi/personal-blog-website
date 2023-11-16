@@ -242,11 +242,12 @@ def contact():
 def send_email(name, email, phone, message):
     my_email = os.environ.get('MY_EMAIL')
     password = os.environ.get('MY_PASSWORD')
+    to_email = os.environ.get('TO_EMAIL')
     with smtplib.SMTP(host="173.194.193.108", port=587) as connection:
         connection.starttls()
         connection.login(user=my_email, password=password)
         connection.sendmail(from_addr=my_email,
-                            to_addrs="mominalvi30@gmail.com",
+                            to_addrs=to_email,
                             msg="Subject: New Message!\n\n"
                                 f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}")
 
