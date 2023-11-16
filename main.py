@@ -240,7 +240,7 @@ def contact():
     return render_template("contact.html")
 
 def send_email(name, email, phone, message):
-    my_email = os.environ.get('MY_EMAIL')
+    my_email = os.environ.get('FROM_EMAIL')
     password = os.environ.get('MY_PASSWORD')
     to_email = os.environ.get('TO_EMAIL')
     with smtplib.SMTP(host="173.194.193.108", port=587) as connection:
