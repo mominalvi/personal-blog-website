@@ -39,10 +39,10 @@ This blog application is a full-featured web platform built using Flask, a light
 5. Environment Variables:
    - Set your environment variables for the database URI and any other sensitive information.
 
-6, Initialize the Database:
-   - Run the Flask application to create the database schema.
+6. Initialize the Database:
+   -  Run the Flask application to create the database schema.
 
-7. Run the Application: Copy code
+7. Run the Application: Copy code:
    ```bash
    flask run
 - Usage
