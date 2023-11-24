@@ -7,7 +7,7 @@ This Flask-powered blog application provides a feature-rich platform for bloggin
 - **User Authentication**: Secure sign-up, login, and logout. Utilizes Flask-Login for session management.
 - **Blog Post Management**: Users can create, edit, and delete their blog posts. Posts include titles, subtitles, images, and rich text content.
 - **Comment System**: Users can post comments on blog articles, fostering community interaction.
-- **Admin Privileges**: Admin users can manage posts and comments site-wide, ensuring content moderation.
+- **Admin Privileges**: Admin user can manage posts and comments site-wide, ensuring content moderation.
 - **Responsive UI**: The application uses Flask-Bootstrap for a responsive and aesthetically pleasing user interface.
 - **Email Integration**: The contact form functionality sends emails using SMTP, allowing for user inquiries and communication.
 - **Database Integration**: Uses Flask-SQLAlchemy for ORM-based database interactions, supporting SQLite and PostgreSQL.
