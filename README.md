@@ -51,14 +51,6 @@ This blog application is a full-featured web platform built using Flask, a light
 - Contributing
 - Contributions to this project are welcome! Please fork the repository and submit a pull request with your features or fixes.
 
-License
-MIT License
-
-   
-- Replace `[repository-url]` with the actual URL of your Git repository.
-- Adjust the 'Contributing' and 'License' sections as per your project's requirements.
-- If you include a license reference, ensure the link points to the correct file in your repository.
-
 # Admin View
 ## Homepage View
 
