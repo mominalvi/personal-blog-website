@@ -10853,3 +10853,12 @@ header.masthead .post-heading .meta a {
   color: #ee6f57;
   text-align: center;
 }
+.profile-image {
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 20px auto;
+    display: block;
+}
+
